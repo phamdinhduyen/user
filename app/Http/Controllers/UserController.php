@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\EditUserRequest;
 use Illuminate\Http\Request;
-use App\Http\Requests\UserRequset;
+use App\Http\Requests\UserRequest;
 use App\Models\Users;
 class UserController extends Controller
 {
@@ -65,7 +65,7 @@ class UserController extends Controller
         return view('clients.user.add', compact('title' , 'allGroups'));
     }
 
-    public function postAdd(UserRequset $request){
+    public function postAdd(UserRequest $request){
         //  $data = [
         //     $request->fullname,
         //     $request->email,

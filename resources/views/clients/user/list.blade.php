@@ -16,6 +16,7 @@
   <div style="display:flex">
     <a href="{{route('user.add')}}" class="btn btn-primary">Create User</a>
     <a style="margin-left: 10px" href="{{route('groups.add')}}" class="btn btn-primary">Create Group</a>
+    <a style="margin-left: 10px" href="{{route('posts.index')}}" class="btn btn-primary">List post</a>
   </div>
   
     @if (@session('msg'))

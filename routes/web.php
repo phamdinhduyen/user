@@ -5,6 +5,7 @@ use App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\PostController;
 
 Route::prefix('')->name('user.')->group(function () {
     Route::get("/", [UserController::class, 'index'])->name('index');
@@ -19,4 +20,14 @@ Route::prefix('groups')->name('groups.')->group(function () {
     Route::get("/", [GroupController::class, 'index'])->name('index');
     Route::post("/", [GroupController::class, 'add'])->name('add');
   
+});
+
+Route::prefix('posts')->name('posts.')->group(function () {
+    Route::get("/", [PostController::class, 'index'])->name('index');
+    Route::get("/add", [PostController::class, 'add'])->name('add');
+    Route::post("/add", [PostController::class, 'postAdd'])->name('postAdd');
+    Route::get("/delete/{id}", [PostController::class, 'update'])->name('update');
+    Route::get("/delete/{id}", [PostController::class, 'delete'])->name('delete');
+    Route::post("/delete-any", [PostController::class, 'handleDeleteAny'])->name('delete-any');
+    Route::get("/restore/{id}", [PostController::class, 'restore'])->name('restore');
 });

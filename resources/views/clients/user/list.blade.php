@@ -63,7 +63,7 @@
         <th>Nhóm</th>
         <th>Trạng thái</th>
         <th><a href="?sort-by=create_at&sort-type={{$sortType}}">Ngày tạo</a></th>
-        <th>Action</th>
+        <th>Hành động</th>
       </tr>
     </thead>
     <tbody>

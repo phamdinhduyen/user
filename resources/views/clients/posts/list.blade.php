@@ -34,13 +34,14 @@
 <form action="{{route('posts.delete-any')}}" method="post" onsubmit="return confirm('Bạn chắc chắc muốn xóa ?')">
     <button class="btn btn-danger" type="submit">Delete</button>
     <a href="{{route('posts.add')}}" class="btn btn-primary">Create post</a>
+
     <table class="table table-bordered">
     <thead>
       <tr>
         <td width=5%><input type="checkbox" id='checkAll'></td>
         <th  width=5%>STT</th>
-        <th>Title</th>
-        <th>Contents</th>
+        <th>Tiêu đề</th>
+        <th>Nội dung</th>
         <th>Trạng thái</th>
         <th>Hành động</th>
       </tr>

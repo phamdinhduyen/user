@@ -5,16 +5,38 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-class Users extends Model
+use App\Models\Phone;
+use App\Models\Groups;
+class User extends Model
 {
     use HasFactory;
-    protected $table = 'user';
+    protected $table ='users';
+    public $timestamps = true;
+    protected $fillable = ['fullname', 'email', 'group_id','status'];
+
+    // quan he 1 nhieu
+    public function phone(){
+        return $this->hasOne(
+            Phone::class,
+            'user_id',
+            'id'
+        );
+    }
+
+    //  lien ket nguoc
+     public function group(){
+        return $this->belongsTo(
+            Groups::class,
+            'group_id',
+            'id'
+        );
+    }
     public function LearnQueryBuilder($filters, $keywords = null, $sortArr = null,  $perPage = null){
         $users = DB::table($this->table)
-            ->select('user.*', 'groups.name as group_name')
-            ->join('groups', 'user.group_id', '=', 'groups.id');
+            ->select('users.*', 'groups.name as group_name')
+            ->join('groups', 'users.group_id', '=', 'groups.id');
 
-        $orderBy = 'user.id';
+        $orderBy = 'users.id';
         $orderType = 'desc';
 
         if(!empty($sortArr) && is_array($sortArr)){

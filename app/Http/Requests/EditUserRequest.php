@@ -28,7 +28,7 @@ class EditUserRequest extends FormRequest
         $id = request()->id;
         return [
             'fullname' => 'required|min:3',
-            'email'=> 'required|email|unique:user,email,' .$id
+            'email'=> 'required|email|unique:users,email,' .$id
         ];
     }
 

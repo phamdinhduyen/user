@@ -10,10 +10,11 @@ use App\Http\Controllers\PostController;
 Route::prefix('')->name('user.')->group(function () {
     Route::get("/", [UserController::class, 'index'])->name('index');
     Route::get("/add", [UserController::class, 'add'])->name('add');
-    Route::post("/add", [UserController::class, 'postadd'])->name('postadd');
+    Route::post("/add", [UserController::class, 'postAdd'])->name('postadd');
     Route::get("/edit{id}", [UserController::class, 'getEdit'])->name('edit');
     Route::post("/edit{id}", [UserController::class, 'postedit'])->name('postedit');
     Route::get("/delete{id}", [UserController::class, 'delete'])->name('delete');
+     Route::get("/relations", [UserController::class, 'relations'])->name('relations');
 });
 
 Route::prefix('groups')->name('groups.')->group(function () {

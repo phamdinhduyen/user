@@ -5,14 +5,18 @@ namespace App\Http\Controllers;
 use App\Http\Requests\EditUserRequest;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
-use App\Models\Users;
+use App\Models\User;
+use App\Models\Phone;
+use App\Models\Groups;
+// use Illuminate\Foundation\Auth\User;
+
 class UserController extends Controller
 {
     private $users;
     const _PER_PAGE = 5;
     protected $groups;
     public function __construct(){
-        $this -> users = new Users;
+        $this -> users = new User;
     }
     public function index(Request $request){
         $filters = [];
@@ -24,12 +28,12 @@ class UserController extends Controller
             } else {
                 $status = 0;
             }
-            $filters[] = ['user.status', '=', $status];
+            $filters[] = ['users.status', '=', $status];
             
         }
         if(!empty($request->group_id)){
             $group_id = $request->group_id;
-            $filters[] = ['user.group_id', '=', $group_id];
+            $filters[] = ['users.group_id', '=', $group_id];
             
         }
         if(!empty($request->keywords)){
@@ -66,19 +70,13 @@ class UserController extends Controller
     }
 
     public function postAdd(UserRequest $request){
-        //  $data = [
-        //     $request->fullname,
-        //     $request->email,
-        //     date('Y-m-d H:i:s')
-        // ];
         $dataInsert = [
             'fullname' =>  $request->fullname,
             'email' => $request->email,
             'group_id' => $request->group_id,
             'status' => $request->status,
-            'created_at' => date('Y-m-d H:i:s')
         ];
-        $this->users->addUser($dataInsert);
+        $post = User::create($dataInsert);
         return redirect()->route('user.index')->with('msg','Thêm người dùng thành công');
     }
 
@@ -105,7 +103,7 @@ class UserController extends Controller
         //     date('Y-m-d H:i:s')
         // ];
 
-         $data = [
+        $data = [
             'fullname' =>  $request->fullname,
             'email' => $request->email,
             'group_id' => $request->group_id,
@@ -123,5 +121,27 @@ class UserController extends Controller
         }else{
             return redirect()->route('user.index')->with('msg', 'lien ket khong ton tai');
         }
+    }
+
+    public function relations(){
+        // quan he 1:1
+        // $user = User::find(4)->phone;
+        // dd($user);
+
+        // lien ket nguoc
+        // $user = Phone::where('phone', '111')->first()->user;
+        // dd($user);
+
+        // Quan he 1 nhieu
+
+        // $users = Groups::find(1)->users()->where('email', 'pdinhduyen@gmail.com')->get();
+        // if($users -> count() > 0){
+        //     foreach ($users as $user){
+        //         echo $user->fullname. '<br/>';
+        //     }
+        // }
+
+        $user = User::find(6)->group;
+        dd($user);
     }
 }

@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Categories;
+use App\Models\Comment;
 
 class Post extends Model
 {
@@ -20,4 +22,22 @@ class Post extends Model
     // protected $keyType = 'string';
     public $timestamps = true;
     protected $fillable = ['title', 'content', 'status'];
+    public function Categories(){
+        return $this->belongsToMany(
+            Categories::class,
+            'categories_posts',
+            'post_id',
+            'categorie_id',
+        );
+    }
+
+
+    public function Comments(){
+        return $this->hasMany(
+            Comment::class,
+            'post_id',
+            'id'
+        );
+    }
+
 }

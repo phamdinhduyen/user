@@ -18,8 +18,9 @@ return new class extends Migration
             // $table->increments('id'); //int, auto_increments, primary key
             $table->string('fullname', 200); //varchar;
             $table->string('email')->unique();
-            $table->integer('group_id');
+            $table->bigInteger('group_id')->unsigned();
             $table->integer('status');
+            $table->bigInteger('country_id')->unsigned();
             // $table->text('description')->nullable(); //text
             $table->timestamps();
            
@@ -33,6 +34,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user');
+        Schema::table('users', function (Blueprint $table){
+            $table->dropColumn('country_id');
+            $table->dropColumn('group_id');
+        } );
     }
 };

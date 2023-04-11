@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\OrmController;
 
 Route::prefix('')->name('user.')->group(function () {
     Route::get("/", [UserController::class, 'index'])->name('index');
@@ -31,4 +32,10 @@ Route::prefix('posts')->name('posts.')->group(function () {
     Route::get("/delete/{id}", [PostController::class, 'delete'])->name('delete');
     Route::post("/delete-any", [PostController::class, 'handleDeleteAny'])->name('delete-any');
     Route::get("/restore/{id}", [PostController::class, 'restore'])->name('restore');
+});
+
+Route::prefix('orm')->name('orm.')->group(function () {
+    Route::get("/", [OrmController::class, 'index'])->name('index');
+    Route::get("/post", [OrmController::class, 'posts'])->name('posts');
+
 });

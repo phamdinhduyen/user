@@ -13,8 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('cars', function (Blueprint $table) {
-            $table->foreign('mechanic_id')->references('id')->on('mechanics');
+        Schema::create('votes', function (Blueprint $table) {
+            $table->id();
+            $table->bigInteger('post_id')->unsigned();
+            $table->integer('value')->default(0);
         });
     }
 
@@ -25,6 +27,8 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('votes', function (Blueprint $table) {
+            $table->dropColumn('post_id');
+        });
     }
 };

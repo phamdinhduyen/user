@@ -23,6 +23,8 @@ class User extends Model
         );
     }
 
+
+
     //  lien ket nguoc
      public function group(){
         return $this->belongsTo(

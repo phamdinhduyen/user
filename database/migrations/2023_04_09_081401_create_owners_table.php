@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('owners', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->bigInteger('car_id')->unsigned();
             $table->timestamps();
+            $table->foreignId('car_id')->constrained()->onUpdate('cascade')->onDelete('cascade')->on('cars');
         });
     }
 

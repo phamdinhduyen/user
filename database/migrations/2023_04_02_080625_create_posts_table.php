@@ -4,7 +4,6 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-
 return new class extends Migration
 {
     /**
@@ -20,9 +19,9 @@ return new class extends Migration
             $table->string('title')->nullable();
             $table->text('content')->nullable();
             $table->integer('status')->default(0);
-            $table->bigInteger('user_id')->unsigned();
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
+            $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade')->on('users');
         });
     }
 
@@ -34,7 +33,8 @@ return new class extends Migration
     public function down()
     {
         Schema::table('posts', function (Blueprint $table){
-            $table->dropColumn('user_id');
-        } );
+            $table->dropForeign(['user_id']);
+        });
+        Schema::dropIfExists('posts');
     }
 };

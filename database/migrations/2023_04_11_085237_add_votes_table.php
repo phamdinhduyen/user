@@ -13,11 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('comments', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->text('content');
-            $table->bigInteger('post_id')->unsigned();
+        Schema::table('votes', function (Blueprint $table) {
+            $table->foreign('post_id')->references('id')->on('posts');
         });
     }
 
@@ -28,8 +25,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('comments', function (Blueprint $table) {
-            $table->dropColumn('post_id');
-        });
+        //
     }
 };

@@ -13,11 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('categories_posts', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('categorie_id')->constrained()->onUpdate('cascade')->onDelete('cascade')->on('categories');
+            $table->string('name');
+            $table->text('content');
+            $table->string('image');
             $table->foreignId('post_id')->constrained()->onUpdate('cascade')->onDelete('cascade')->on('posts');
-            $table->timestamps();
         });
     }
 
@@ -28,8 +29,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('categories_posts', function (Blueprint $table) {
-            $table->dropColumn('categorie_id');
+        Schema::table('comments', function (Blueprint $table) {
             $table->dropColumn('post_id');
         });
     }

@@ -7,15 +7,20 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\OrmController;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Auth\RegisterController;
 
 Route::prefix('')->name('user.')->group(function () {
     Route::get("/", [UserController::class, 'index'])->name('index');
     Route::get("/add", [UserController::class, 'add'])->name('add');
     Route::post("/add", [UserController::class, 'postAdd'])->name('postadd');
+    Route::get("/create", [RegisterController::class, 'get'])->name('get');
+    Route::post("/create", [RegisterController::class, 'create'])->name('create');
+    
     Route::get("/edit{id}", [UserController::class, 'getEdit'])->name('edit');
     Route::post("/edit{id}", [UserController::class, 'postedit'])->name('postedit');
     Route::get("/delete{id}", [UserController::class, 'delete'])->name('delete');
-     Route::get("/relations", [UserController::class, 'relations'])->name('relations');
+    Route::get("/relations", [UserController::class, 'relations'])->name('relations');
 });
 
 Route::prefix('groups')->name('groups.')->group(function () {
@@ -39,3 +44,6 @@ Route::prefix('orm')->name('orm.')->group(function () {
     Route::get("/post", [OrmController::class, 'posts'])->name('posts');
 
 });
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

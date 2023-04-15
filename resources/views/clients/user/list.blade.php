@@ -14,7 +14,7 @@
 <div class="container">
   <h2>Danh sách người dùng </h2>
   <div style="display:flex">
-    <a href="{{route('user.add')}}" class="btn btn-primary">Create User</a>
+    <a href="{{route('user.create')}}" class="btn btn-primary">Create User</a>
     <a style="margin-left: 10px" href="{{route('groups.add')}}" class="btn btn-primary">Create Group</a>
     <a style="margin-left: 10px" href="{{route('posts.index')}}" class="btn btn-primary">List post</a>
   </div>

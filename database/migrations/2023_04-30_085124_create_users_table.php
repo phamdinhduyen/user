@@ -15,16 +15,18 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            // $table->increments('id'); //int, auto_increments, primary key
-            $table->string('fullname', 200); //varchar;
+            $table->string('fullname', 200)->nullable();
+            $table->string('name', 200);
             $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->rememberToken();
+            // $table->increments('id'); //int, auto_increments, primary key
             $table->integer('status');
-            
-            // $table->text('description')->nullable(); //text
-            $table->timestamps();
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
             $table->foreignId('country_id')->constrained()->onUpdate('cascade')->onDelete('cascade')->on('countrys');
             $table->foreignId('group_id')->constrained()->onUpdate('cascade')->onDelete('cascade')->on('groups');
-           
         });
     }
 

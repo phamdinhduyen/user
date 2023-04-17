@@ -71,10 +71,13 @@ class UserController extends Controller
 
     public function postAdd(UserRequest $request){
         $dataInsert = [
+            'name' =>  $request->fullname,
             'fullname' =>  $request->fullname,
             'email' => $request->email,
             'group_id' => $request->group_id,
             'status' => $request->status,
+            'country_id' =>  1,
+            'password' => 11111111
         ];
         $post = User::create($dataInsert);
         return redirect()->route('user.index')->with('msg','Thêm người dùng thành công');

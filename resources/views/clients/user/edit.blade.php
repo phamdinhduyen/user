@@ -1,4 +1,78 @@
-<!DOCTYPE html>
+
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+             <h2>Sửa thông tin user </h2>
+              <form class="form-horizontal" action="" method="POST">
+                  @csrf
+                  @error('msg')
+                    <div class="alert alert-danger text-center">{{$message}}</div>
+                  @enderror
+                  <div class="form-group">
+                    <label class="control-label col-sm-2" for="fullname">fullname:</label>
+                    <div class="col-sm-10">
+                      <input type="fullname" class="form-control" id="fullname" placeholder="Enter fullname" name="fullname" value="{{old('fullname') ?? $userDetail->fullname}}">
+                      @error('fullname')
+                      <span style="color:red"> {{$message}}</span>
+                      @enderror
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-sm-2" for="email">email:</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="email" placeholder="Enter email" name="email" value="{{old('email') ?? $userDetail->email}}">
+                      @error('email')
+                      <span style="color:red">{{$message}}</span>
+                      @enderror
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-sm-2" for="price">Nhóm:</label>
+                    <div class="col-sm-10">
+                    <select name="group_id" class="form-control" id="">
+                      <option value="0">Chọn nhóm</option>
+                      @if (!empty($allGroups))
+                          @foreach ($allGroups as $item)
+                            <option value="{{$item->id}}" {{old('group_id')
+                            == $item->id ||  $userDetail->group_id == $item->id ?'selected':false }}>{{$item ->name}}</option>
+                          @endforeach
+                      @endif
+                    </select>
+                      @error('group_id')
+                      <span style="color:red">{{$message}}</span>
+                      @enderror
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-sm-2" for="status">Trạng thái:</label>
+                    <div class="col-sm-10">
+                    <select class="form-control" name="status">
+                        <option value="0" {{old('status')==0  ||  $userDetail->status == $item->id ?'selected':false}}>Kích hoạt</option>
+                        <option value="1" {{old('status')==1  ||  $userDetail->status == $item->id ?'selected':false}}>Chưa kích hoạt</option>
+                      </select>
+                      @error('status')
+                      <span style="color:red">{{$message}}</span>
+                      @enderror
+                    </div>
+                  </div>
+                
+                  <div class="form-group" style="margin-top: 5px">
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <button type="submit" class="btn btn-primary">Sửa</button>
+                      <a href="{{route('user.index')}}" class="btn btn-warning">Quay lại</a>
+                    </div>
+                  </div>
+                </form>
+        </div>
+    </div>
+</div>
+@endsection
+
+
+{{-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <title>
@@ -13,7 +87,7 @@
 </head>
 <body>
 {{-- {{dd($userDetail)}} --}}
-<div class="container">
+{{-- <div class="container">
 
   <h2>Sua nguoi dung </h2>
   <form class="form-horizontal" action="" method="POST">
@@ -79,4 +153,4 @@
 </div>
 
 </body>
-</html>
+</html> --}} 

@@ -1,3 +1,44 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Login') }}</div>
+                  <div class="card-body">
+                    <form class="form-horizontal" action="" method="POST">
+                        @csrf
+                        @error('msg')
+                          <div class="alert alert-danger text-center">{{$message}}</div>
+                        @enderror
+                        <div class="form-group">
+                          <label class="control-label col-sm-2" for="group">Nhóm:</label>
+                          <div class="col-sm-10">
+                            <input type="text" name="name" placeholder="Nhập tên nhóm">
+                          </select>
+                            @error('name')
+                            <span style="color:red">{{$message}}</span>
+                            @enderror
+                          </div>
+                        </div>
+                        </div>
+                        <div class="form-group">        
+                          <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <a href="{{route('user.index')}}" class="btn btn-warning">Back</a>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
+{{-- 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,11 +77,11 @@
     <div class="form-group">        
       <div class="col-sm-offset-2 col-sm-10">
         <button type="submit" class="btn btn-default">Submit</button>
-        <a href="{{route('user.index')}}" class="btn btn-warning">Back</a>
+        {{-- <a href="{{route('user.index')}}" class="btn btn-warning">Back</a> --}}
       </div>
     </div>
-  </form>
+  {{-- </form>
 </div>
 
 </body>
-</html>
+</html> --}} 
